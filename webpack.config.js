@@ -18,7 +18,14 @@ module.exports = {
                 }
             }, //下面是使用 ant-design 的配置文件
             { test: /\.css$/, loader: 'style-loader!css-loader' },
-            { test: /\.(png|jpg)$/, loader: 'url-loader!file-loader?limit=8192' }
+            // { test: /\.(png|jpg|jpeg|svg|gif)$/, loader: 'url-loader!file-loader?limit=1024&name=[path][name].[ext]&outputPath=images/&publicPath=build/' }
+            {
+                test: /\.(png|jpg|jpeg|gif|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[ext]?[hash]'
+                }
+            }
         ]
     }
 };
