@@ -1,5 +1,3 @@
-import Leaflet from 'leaflet';
-
 import 'proj4leaflet/lib/proj4-compressed.js';
 import 'proj4leaflet/src/proj4leaflet.js';
 

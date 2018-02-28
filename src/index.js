@@ -8,3 +8,7 @@ export { BaiduMap };
 //聚合数据
 import * as markerCluster from './js/components/markercluster_component';
 export { markerCluster };
+
+//测量
+import * as measure from './js/components/Measure_component';
+export { measure };
