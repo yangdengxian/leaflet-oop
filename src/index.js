@@ -12,3 +12,7 @@ export { markerCluster };
 //测量
 import * as measure from './js/components/Measure_component';
 export { measure };
+
+//坐标转换
+import * as transform from './js/components/Transform_component';
+export { transform };
