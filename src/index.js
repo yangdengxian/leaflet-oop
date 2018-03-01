@@ -16,3 +16,7 @@ export { measure };
 //坐标转换
 import * as transform from './js/components/Transform_component';
 export { transform };
+
+//要素编辑
+import * as features_edit from './js/components/Featrues_component';
+export { features_edit };

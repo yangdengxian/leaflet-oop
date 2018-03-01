@@ -27,6 +27,7 @@
     "css-loader": "^0.25.0",
     "file-loader": "^1.1.10",
     "leaflet": "^1.3.1",
+    "leaflet-draw": "https://github.com/Leaflet/Leaflet.draw.git",
     "leaflet-measure": "^3.0.3",
     "leaflet-wfst": "^2.0.1-beta.19",
     "leaflet.markercluster": "^1.3.0",
