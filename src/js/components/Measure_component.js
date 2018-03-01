@@ -1,3 +1,6 @@
+/**
+ * 测量插件
+ */
 import 'leaflet-measure/dist/leaflet-measure.css';
 // import 'leaflet-measure/dist/leaflet-measure.js';
 import 'leaflet-measure/dist/leaflet-measure.de_CH.js';
@@ -10,6 +13,12 @@ map.on('measurefinish', function(evt) {
     writeResults(evt);
 });
 
+
+map.on('measurestart', function(evt) {
+    console.log(evt);
+
+});
+
 const measureControl = new L.Control.Measure({
     position: 'topright',
     primaryLengthUnit: 'meters',
@@ -20,7 +29,8 @@ const measureControl = new L.Control.Measure({
     completedColor: '#C8F2BE',
     className: 'leaflet-measure-resultpopup',
     autoPanPadding: [10, 10],
-    captureZIndex: 10000
+    captureZIndex: 10000,
+    localization: 'cn'
 });
 measureControl.addTo(map);
 
