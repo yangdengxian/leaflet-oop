@@ -22,5 +22,7 @@ import * as features_edit from './js/components/Featrues_component';
 export { features_edit };
 
 //WFS服务
-import * as ESRI_WFS_compononent from './js/components/ESRI_WFS_compononent';
-export { ESRI_WFS_compononent };
+/* import * as ESRI_WFS_compononent from './js/components/ESRI_WFS_compononent';
+export { ESRI_WFS_compononent }; */
+import * as WFS_compononent from './js/components/WFS_component';
+export { WFS_compononent };
