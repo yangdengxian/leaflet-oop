@@ -5,3 +5,5 @@
 # v1.0.2 添加leaflet百度地图加载功能，添加数据聚合插件
 # v1.0.3 添加leaflet测量和坐标转换插件
 # v1.0.4 添加leaflet缓冲区分析功能，添加esri-leaflet插件
+
+系统存在bug，后续优化
