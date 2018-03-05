@@ -1,6 +1,7 @@
 /**
  * 模仿 esri identity查询
  */
+
 import map from './BaiduMap';
 
 const server_url = "http://cloud.soundhw.com/arcgis/rest/services/busmap/MapServer/identify";
@@ -18,6 +19,13 @@ function query(geometry, latlng) {
         layers: "top"
     };
     const url = server_url + L.Util.getParamString(param, server_url);
+    const headers = new Headers({
+        "Content-Type": 'application/json',
+        "Accept": 'application/json',
+        "Origin": '*',
+        "Access-Control-Allow-Origin": '*'
+    });
+
     fetch(url).then((response) => {
             return response.json();
         })

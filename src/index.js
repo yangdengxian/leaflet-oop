@@ -26,3 +26,7 @@ export { features_edit };
 export { ESRI_WFS_compononent }; */
 import * as WFS_compononent from './js/components/WFS_component';
 export { WFS_compononent };
+
+//buffer
+import * as Buffer_componet from './js/components/Buffer_componet';
+export { Buffer_componet };
