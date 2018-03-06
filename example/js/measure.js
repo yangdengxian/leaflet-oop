@@ -1,22 +1,7 @@
-/**
- * 测量插件
- */
-import 'leaflet-measure/dist/leaflet-measure.css';
-// import 'leaflet-measure/dist/leaflet-measure.js';
-import 'leaflet-measure/dist/leaflet-measure.cn.js';
-
-import map from './BaiduMap';
-
 map.measureControl = true;
 
 map.on('measurefinish', function(evt) {
     writeResults(evt);
-});
-
-
-map.on('measurestart', function(evt) {
-    console.log(evt);
-
 });
 
 const measureControl = new L.Control.Measure({

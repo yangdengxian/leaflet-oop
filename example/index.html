@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <link href="./css/style.css" rel="stylesheet">
+
+    <title>leaflet</title>
+</head>
+
+<body>
+    <div id="leafletMap"></div>
+    <!-- measure -->
+    <div id="eventoutput">
+
+    </div>
+    <!-- features draw edit -->
+    <div id="controls">
+        <div class="wrapper">
+            <h2>L.Clipper</h2>
+            <a class="github-button" href="https://github.com/willfarrell/Leaflet.Clipper" data-count-href="/w8r/Leaflet.Clipper/stargazers" data-count-api="/repos/w8r/Leaflet.Clipper#stargazers_count">Star</a>
+            <a class="github-button" href="https://github.com/willfarrell/Leaflet.Clipper" data-count-href="/w8r/Leaflet.Clipper/network" data-count-api="/repos/w8r/Leaflet.Clipper#forks_count">Fork</a>
+            <p>
+                1. Choose operation:<br>
+                <button id="AND" onclick="changeMethod('AND')"><img title="AND / Intersection" src="svg/AND.svg" width="15px"></button>
+                <button id="OR" onclick="changeMethod('OR')"><img title="OR / Union" src="svg/OR.svg" width="15px"></button>
+                <button id="XOR" onclick="changeMethod('XOR')"><img title="XOR" src="svg/XOR.svg" width="15px"></button>
+                <button id="NOT" onclick="changeMethod('NOT')"><img title="NOT / Difference" src="svg/NOT.svg" width="15px"></button>
+                <br> 2. Click `Source` polygon.<br> 3. Click `Clipper` polygon.<br>
+                <br> Hit refresh to reset.
+                <br><br>
+                <a href="//github.com/willfarrell/Leaflet.Clipper/">Documentation</a>
+            </p>
+
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <!-- baidu map s-->
+    <script src="../node_modules/proj4leaflet/lib/proj4-compressed.js"></script>
+    <script src="../node_modules/proj4leaflet/src/proj4leaflet.js"></script>
+    <script src="./js/baidu.js"></script>
+    <!-- baidu map e-->
+    <!-- measure s -->
+    <link rel="stylesheet" href="../node_modules/leaflet-measure/dist/leaflet-measure.css" />
+    <script src="../node_modules/leaflet-measure/dist/leaflet-measure.cn.js"></script>
+    <script src="./js/measure.js"></script>
+    <!-- measure e -->
+    <!-- features draw edit s -->
+    <link rel="stylesheet" href="../node_modules/leaflet-draw/src/leaflet.draw.css" />
+    <script src="../node_modules/leaflet-draw/src/Leaflet.draw.js"></script>
+    <script src="../node_modules/leaflet-draw/src/Leaflet.Draw.Event.js"></script>
+
+    <script src="../node_modules/leaflet-draw/src/Toolbar.js"></script>
+    <script src="../node_modules/leaflet-draw/src/Tooltip.js"></script>
+
+    <script src="../node_modules/leaflet-draw/src/ext/GeometryUtil.js"></script>
+    <script src="../node_modules/leaflet-draw/src/ext/LatLngUtil.js"></script>
+    <script src="../node_modules/leaflet-draw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="../node_modules/leaflet-draw/src/ext/Polygon.Intersect.js"></script>
+    <script src="../node_modules/leaflet-draw/src/ext/Polyline.Intersect.js"></script>
+    <script src="../node_modules/leaflet-draw/src/ext/TouchEvents.js"></script>
+
+    <script src="../node_modules/leaflet-draw/src/draw/DrawToolbar.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.Marker.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.CircleMarker.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="../node_modules/leaflet-draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+    <script src="../node_modules/leaflet-draw/src/edit/EditToolbar.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="../node_modules/leaflet-draw/src/Control.Draw.js"></script>
+
+    <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.Marker.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.CircleMarker.js"></script>
+    <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="../node_modules/leaflet-clipper/examples/js/clipper.js"></script>
+    <script src="../node_modules/leaflet-clipper/examples/js/L.Clipper.js"></script>
+    <link rel="stylesheet" href="./css/featrues.css" />
+    <script src="./js/features.js"></script>
+    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+    <!-- features draw edit e -->
+    <!-- wfs leaflet s-->
+    <!-- <script src="../node_modules/esri-leaflet/dist/esri-leaflet-debug.js"></script>
+    <script src="./js/esri-leaflet.js"></script>
+    <script src="./js/wfs.js"></script> -->
+    <!-- wfs leaflet e-->
+    <!-- buffer s-->
+    <!-- <script src="../node_modules/wkx/dist/wkx.js"></script>
+    <script src="./js/buffer.js"></script> -->
+    <!-- buffer e-->
+</body>

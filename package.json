@@ -25,23 +25,26 @@
     "babel-loader": "^6.4.1",
     "babel-preset-es2015": "^6.24.0",
     "babelify": "^7.3.0",
+    "clipper-lib": "^6.2.1",
     "css-loader": "^0.25.0",
     "esri-leaflet": "^2.1.3",
     "file-loader": "^1.1.10",
     "jquery": "^3.3.1",
     "leaflet": "^1.3.1",
+    "leaflet-clipper": "https://github.com/willfarrell/Leaflet.Clipper.git",
     "leaflet-draw": "https://github.com/Leaflet/Leaflet.draw.git",
     "leaflet-editable": "https://github.com/Leaflet/Leaflet.Editable.git",
     "leaflet-measure": "^3.0.3",
     "leaflet-wfst": "^2.0.1-beta.19",
     "leaflet.markercluster": "^1.3.0",
+    "leaflet.pm": "^0.23.1",
     "proj4": "^2.4.4",
     "proj4leaflet": "^1.0.2",
     "style-loader": "^0.13.2",
     "url-loader": "^0.6.2",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.11.2",
-    "wkx": "https://github.com/cschwarz/wkx.git"
+    "wkx": "^0.4.4"
   },
   "dependencies": {
     "leaflet-wfst": "git://github.com/Flexberry/Leaflet-WFST.git#v1.1.1"

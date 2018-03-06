@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>esri</title>
+    <link rel="stylesheet" href="http://cloud.soundhw.com:10080/arcgis_js/esri/css/esri.css" />
+    <link rel="stylesheet" href="http://cloud.soundhw.com:10080/arcgis_js/dijit/themes/tundra/tundra.css" />
+    <link rel="stylesheet" href="http://cloud.soundhw.com:10080/arcgis_js/dijit/themes/claro/claro.css" />
+    <script src="http://cloud.soundhw.com:10080/arcgis_js/init.js"></script>
+    <style>
+        html,
+        body,
+        #map {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #map {
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map">
+
+    </div>
+    <div class="toolBar">
+        <button type="button" id="drawPolygonBtn">绘制面</button>
+        <button type="button" id="drawLineBtn">绘制线</button>
+        <button type="button" id="unionBtn">合并</button>
+        <button type="button" id="cutterBtn">分割</button>
+    </div>
+    <script src="./js/wktUtl.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        require(["esri/map",
+            "esri/geometry/geometryEngine",
+            "esri/toolbars/draw",
+            "esri/symbols/SimpleFillSymbol",
+            "esri/symbols/SimpleLineSymbol",
+            "esri/Color",
+            "esri/graphic",
+            "esri/layers/GraphicsLayer",
+            "esri/geometry/Polygon",
+            "dojo/domReady!"
+        ], function(Map, geometryEngine, Draw, SimpleFillSymbol, SimpleLineSymbol, Color, Graphic, GraphicsLayer, Polygon) {
+            var map = new Map("map", {
+                basemap: "topo", //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
+                center: [-122.45, 37.75], // longitude, latitude
+                zoom: 13
+            });
+            var drawTool = new Draw(map, {
+                tooltipOffset: 20,
+                drawTime: 90
+            });
+            //原始样式
+            var symbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASHDOT,
+                    new Color([255, 0, 0]), 2), new Color([255, 255, 0, 0.25])
+            );
+            //合并样式
+            var symbolBase = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                    new Color([179, 212, 101]), 3), new Color([75, 96, 36, 0.75])
+            );
+            var graphicsLayer = new GraphicsLayer({
+                id: "graphicsLayer"
+            });
+            map.addLayer(graphicsLayer);
+            drawTool.on("draw-complete", drawComplete);
+
+            function drawComplete(evt) {
+                drawTool.deactivate();
+                if (evt.geometry.type === "polygon") {
+                    selfintersect(evt.geometry);
+
+                }
+            }
+
+            function selfintersect(geometry) {
+                var polyWKT = PolygonToWKT(geometry);
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.232.225:3001/selfintersect",
+                    data: {
+                        geometry: polyWKT
+                    },
+                    success: function(res) {
+                        var geometry = WktToPolygon(res["result"]["geometry"]);
+                        var polygon = geometryEngine.simplify(geometry);
+                        var graphic = new Graphic(polygon, symbol);
+                        map.graphics.add(graphic);
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+            function PolygonToWKT(geometry) {
+                var wkt = [];
+                var rings = geometry.rings;
+                for (var i in rings) {
+                    var ring = rings[i];
+                    for (var j in ring) {
+                        var p = ring[j];
+                        wkt.push(p.join(" "));
+                    }
+                }
+                return "POLYGON ((" + wkt.join(",") + "))";
+            }
+
+            /** 
+             * wkt转化成arcgis的Polygon对象 
+             * @param wkt 
+             * @returns {Polygon} 
+             * @constructor 
+             */
+            function WktToPolygon(wkt, spatialreference) {
+                var wktUtil = new WKTUtil();
+                var points = wktUtil.read(wkt);
+                var json = {
+                    rings: points,
+                    spatialReference: {
+                        "wkid": 4326
+                    }
+                }
+                var polygon = new Polygon(json);
+                return polygon;
+            }
+
+            var drawPolyBtnObj = dojo.byId("drawPolygonBtn");
+            var drawLineBtnObj = dojo.byId("drawLineBtn");
+            var unionBtnObj = dojo.byId("unionBtn");
+            var cutterBtnObj = dojo.byId("cutterBtn");
+            drawPolyBtnObj.onclick = function() {
+                drawTool.activate(Draw.POLYGON);
+            };
+            cutterBtnObj.onclick = function() {
+                drawTool.activate(Draw.POLYLINE);
+            };
+
+            unionBtnObj.onclick = function(evt) {
+                var graphics = map.graphics.graphics;
+                var poly = new Polygon();
+                for (var i = 0; i < graphics.length; i++) {
+                    poly = geometryEngine.union(poly, graphics[i].geometry);
+                }
+                var graphic = new Graphic(poly, symbolBase);
+                map.graphics.clear();
+                map.graphics.add(graphic);
+            };
+        });
+    </script>
+</body>
+
+</html>
