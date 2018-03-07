@@ -1,5 +1,4 @@
 const wkx = require("wkx");
-const buffer_url = "http://192.168.232.225:3001/buffer";
 const PI = Math.PI;
 
 function queryBuffer(geoJSON) {
@@ -8,7 +7,7 @@ function queryBuffer(geoJSON) {
         geometry: wktStr,
         distance: 100
     };
-    const url = buffer_url + L.Util.getParamString(obj, buffer_url);
+    const url = urlObj.buffer_url + L.Util.getParamString(obj, urlObj.buffer_url);
     fetch(url).then((response) => {
             return response.json();
         })
@@ -38,13 +37,14 @@ function getQueryBufferResult(geometry) {
 
 map.on(L.Draw.Event.CREATED, (e) => {
     let type = e.layerType,
-        layer = e.layer,
-        latlngs = e.layer.getLatLngs(),
-        geoJSONPbj = e.layer.toGeoJSON();
+        layer = e.layer;
+
     switch (type) {
         case "polygon":
             //自相交面暂时不在此范围内，有待优化
             // console.log(L.GeometryUtil.geodesicArea(e.layer.getLatLngs()[0]));
+            var latlngs = e.layer.getLatLngs(),
+                geoJSONPbj = e.layer.toGeoJSON();
             if (L.GeometryUtil.geodesicArea(e.layer.getLatLngs()[0]) > 0) {
                 let coordinatesMeters = [];
                 latlngs[0].forEach(latlng => {
@@ -67,6 +67,8 @@ map.on(L.Draw.Event.CREATED, (e) => {
         case "polyline":
             //自相交面暂时不在此范围内，有待优化
             let points = [];
+            var latlngs = e.layer.getLatLngs(),
+                geoJSONPbj = e.layer.toGeoJSON();
             geoJSONPbj.geometry.coordinates.forEach(point => {
                 let pint = L.point(point[0], point[1]);
                 points.push(pint);

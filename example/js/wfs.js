@@ -1,5 +1,3 @@
-const wfs_url = "http://cloud.soundhw.com/arcgis/rest/services/busmap/MapServer/identify";
-
 function queryWFS(geometry, latlng) {
     const param = {
         f: "json",
@@ -12,7 +10,7 @@ function queryWFS(geometry, latlng) {
         mapExtent: "117.34354073491765, 32.89453950207875,117.42942184053787,32.940547237232444",
         layers: "top"
     };
-    const url = wfs_url + L.Util.getParamString(param, wfs_url);
+    const url = urlObj.wfs_url + L.Util.getParamString(param, urlObj.wfs_url);
     const headers = new Headers({
         "Content-Type": 'application/json',
         "Accept": 'application/json',
@@ -31,7 +29,7 @@ function queryWFS(geometry, latlng) {
 }
 
 function getQueryWFSResult(result, latlng) {
-    console.log(result);
+    let infoObj = document.getElementById('queryInfo');
     if (result.results.length === 0) {
         return;
     }
@@ -42,11 +40,25 @@ function getQueryWFSResult(result, latlng) {
             popupTemplate += key + "：" + properties[key] + " <br>";
         }
     }
-    let template = L.Util.template(popupTemplate, properties);
+    /* let template = L.Util.template(popupTemplate, properties);
     L.popup()
         .setLatLng(latlng)
         .setContent(template)
-        .openOn(map);
+        .openOn(map); */
+    infoObj.innerHTML = popupTemplate;
+}
+
+function transformShow(latlng) {
+    let infoObj = document.getElementById('transformInfo');
+    let coordInfoObj = {},
+        infoStr = "";
+    coordInfoObj.latlng = latlng;
+    coordInfoObj.meters = crs.project(latlng);
+    coordInfoObj.pixel = crs.latLngToPoint(latlng, map.getZoom());
+    infoStr = "经纬度坐标(lat,lon)：" + coordInfoObj.latlng + "<br/>" +
+        "平面坐标(x,y)： " + coordInfoObj.meters + "<br/>" +
+        "屏幕坐标(x,y)： " + coordInfoObj.pixel + "<br/>";
+    infoObj.innerHTML = infoStr;
 }
 map.on('click', (evt) => {
     let geometry = JSON.stringify({
@@ -54,4 +66,5 @@ map.on('click', (evt) => {
         y: evt.latlng.lat
     });
     queryWFS(geometry, evt.latlng);
+    transformShow(evt.latlng);
 });

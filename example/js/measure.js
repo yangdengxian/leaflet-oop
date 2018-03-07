@@ -1,8 +1,8 @@
 map.measureControl = true;
 
-map.on('measurefinish', function(evt) {
+/* map.on('measurefinish', function(evt) {
     writeResults(evt);
-});
+}); */
 
 const measureControl = new L.Control.Measure({
     localization: 'cn',

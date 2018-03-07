@@ -36,7 +36,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
     ],
     devServer: {
-        host: '192.168.232.225',
+        host: '127.0.0.1',
         port: 8080,
         contentBase: "./",
         historyApiFallback: true,

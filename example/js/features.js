@@ -51,7 +51,7 @@ map.on(L.Draw.Event.CREATED, (e) => {
 
     editableLayers.addLayer(layer);
 });
-
+/* 
 var drawState = null;
 
 function changeMethod(method) {
@@ -70,4 +70,18 @@ function resetButtons() {
     ['AND', 'OR', 'XOR', 'NOT'].map(function(method) {
         document.getElementById(method).style.borderStyle = 'outset';
     });
-}
+} */
+
+
+/* const PMControl = new L.Control.PMButton({
+    position: 'topleft', // toolbar position, options are 'topleft', 'topright', 'bottomleft', 'bottomright'
+    drawMarker: true, // adds button to draw markers
+    drawPolyline: true, // adds button to draw a polyline
+    drawRectangle: true, // adds button to draw a rectangle
+    drawPolygon: true, // adds button to draw a polygon
+    drawCircle: true, // adds button to draw a cricle
+    cutPolygon: true, // adds button to cut a hole in a polygon
+    editMode: true, // adds button to toggle edit mode for all layers
+    removalMode: true, // adds a button to remove layers
+});
+PMControl.addTo(map); */
