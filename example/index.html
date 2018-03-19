@@ -5,7 +5,7 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../node_modules/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
     <link href="./css/style.css" rel="stylesheet">
 
     <title>leaflet</title>
@@ -18,6 +18,7 @@
 
     </div>
     <div class="toolBar">
+        <button type="button" onclick="unionPolygon();">合并</button>
         <div id="transformInfo">
 
         </div>
@@ -46,7 +47,9 @@
         </div>
     </div> -->
     <script src="./js/url.js"></script>
-    <script src="../node_modules/leaflet/dist/leaflet.js"></script>
+    <script src="./js/util.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
     <!-- baidu map s-->
     <script src="../node_modules/proj4leaflet/lib/proj4-compressed.js"></script>
     <script src="../node_modules/proj4leaflet/src/proj4leaflet.js"></script>
@@ -95,14 +98,8 @@
     <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.Marker.js"></script>
     <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.CircleMarker.js"></script>
     <script src="../node_modules/leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="../node_modules/leaflet-buffer/dist/leaflet.buffer.min.js"></script>
     <script src="./js/features.js"></script>
-    <!--  <script src="../node_modules/leaflet-clipper/examples/js/clipper.js"></script>
-    <script src="../node_modules/leaflet-clipper/examples/js/L.Clipper.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
-    <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
-    <link rel="stylesheet" href="./css/featrues.css" />
-    <script src="./js/features.js"></script>
-    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script> -->
     <!-- features draw edit e -->
     <!-- wfs leaflet s-->
     <!--     <script src="../node_modules/esri-leaflet/dist/esri-leaflet-debug.js"></script>
@@ -110,8 +107,12 @@
     <script src="./js/wfs.js"></script>
     <!-- wfs leaflet e-->
     <!-- buffer s-->
-    <script src="../node_modules/wkx/dist/wkx.js"></script>
-    <script src="./js/buffer.js"></script>
+    <!--<script src="../node_modules/wkx/dist/wkx.js"></script>
+    <script src="./js/buffer.js"></script>-->
+    <script src="../node_modules/leaflet-buffer/src/jsts-monkey.js"></script>
+    <script src="../node_modules/leaflet-buffer/src/leaflet.buffer.js"></script>
+    <script src="../node_modules/leaflet-buffer/src/system-replacement.js"></script>
+    <link rel="stylesheet" href="../node_modules/leaflet-buffer/src/leaflet.buffer.css" />
     <!-- buffer e-->
 
 </body>

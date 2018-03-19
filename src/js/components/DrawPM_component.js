@@ -1,6 +1,7 @@
-import 'leaflet.pm';
+// import 'leaflet.pm/dist/leaflet.pm.min.js';
 import 'leaflet.pm/dist/leaflet.pm.css';
 import map from './BaiduMap';
+const leafletPM = require("leaflet.pm");
 
 // define toolbar options
 const options = {
@@ -14,6 +15,4 @@ const options = {
     editMode: true, // adds button to toggle edit mode for all layers
     removalMode: true, // adds a button to remove layers
 };
-
-// add leaflet.pm controls to the map
-map.pm.addControls(options);
+console.log(map.pm);

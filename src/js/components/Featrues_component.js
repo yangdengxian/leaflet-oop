@@ -31,6 +31,7 @@ import "leaflet-draw/src/edit/handler/Edit.Rectangle.js";
 import "leaflet-draw/src/edit/handler/Edit.Marker.js";
 import "leaflet-draw/src/edit/handler/Edit.CircleMarker.js";
 import "leaflet-draw/src/edit/handler/Edit.Circle.js";
+import 'leaflet-buffer/dist/leaflet.buffer.min.js';
 import map from './BaiduMap';
 
 let editableLayers = new L.FeatureGroup();
@@ -63,7 +64,11 @@ const options = {
     },
     edit: {
         featureGroup: editableLayers, //REQUIRED!!
-        remove: false
+        remove: true,
+        buffer: {
+            replacePolylines: false,
+            separateBuffer: true,
+        }
     }
 };
 

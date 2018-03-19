@@ -18,8 +18,8 @@ export { measure }; */
 export { transform }; */
 
 //要素编辑
-/* import * as features_edit from './js/components/Featrues_component';
-export { features_edit }; */
+import * as features_edit from './js/components/Featrues_component';
+export { features_edit };
 
 //WFS服务
 /* import * as ESRI_WFS_compononent from './js/components/ESRI_WFS_compononent';
@@ -31,6 +31,3 @@ export { WFS_compononent }; */
 /* import * as Buffer_componet from './js/components/Buffer_componet';
 export { Buffer_componet }; */
 // import * as Clipper_component from './js/components/Clipper_component';
-
-//面切割
-import * as DrawPM from './js/components/DrawPM_component';
