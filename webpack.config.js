@@ -22,10 +22,17 @@ module.exports = {
             { test: /\.css$/, loader: 'style-loader!css-loader' },
             // { test: /\.(png|jpg|jpeg|svg|gif)$/, loader: 'url-loader!file-loader?limit=1024&name=[path][name].[ext]&outputPath=images/&publicPath=build/' }
             {
-                test: /\.(png|jpg|jpeg|gif|svg)$/,
+                test: /\.(png|jpg|jpeg|gif|svg|ttf|woff)$/,
                 loader: 'file-loader',
                 options: {
                     name: 'images/[name].[ext]?[hash]'
+                }
+            },
+            {
+                test: /\.(ttf|woff)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name].[ext]?[hash]'
                 }
             }
         ]
@@ -36,9 +43,9 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
     ],
     devServer: {
-        host: '127.0.0.1',
-        port: 8080,
         contentBase: "./",
+        host: "127.0.0.1",
+        port: "8080",
         historyApiFallback: true,
         inline: true,
         hot: true

@@ -31,7 +31,7 @@ import "leaflet-draw/src/edit/handler/Edit.Rectangle.js";
 import "leaflet-draw/src/edit/handler/Edit.Marker.js";
 import "leaflet-draw/src/edit/handler/Edit.CircleMarker.js";
 import "leaflet-draw/src/edit/handler/Edit.Circle.js";
-import 'leaflet-buffer/dist/leaflet.buffer.min.js';
+
 import map from './BaiduMap';
 
 let editableLayers = new L.FeatureGroup();
@@ -64,11 +64,7 @@ const options = {
     },
     edit: {
         featureGroup: editableLayers, //REQUIRED!!
-        remove: true,
-        buffer: {
-            replacePolylines: false,
-            separateBuffer: true,
-        }
+        remove: false
     }
 };
 
@@ -86,10 +82,7 @@ map.on(L.Draw.Event.CREATED, (e) => {
     if (type === "polygon") {
         //自相交面暂时不在此范围内，有待优化
         console.log(L.GeometryUtil.geodesicArea(e.layer.getLatLngs()[0]));
-        L.polygon(e.layer.getLatLngs(), { color: 'red' }).addTo(map);
     }
 
     editableLayers.addLayer(layer);
 });
-
-export default editableLayers;

@@ -3,7 +3,7 @@
  */
 import 'leaflet-measure/dist/leaflet-measure.css';
 // import 'leaflet-measure/dist/leaflet-measure.js';
-import 'leaflet-measure/dist/leaflet-measure.cn.js';
+import 'leaflet-measure/dist/leaflet-measure.de_CH.js';
 
 import map from './BaiduMap';
 
@@ -20,7 +20,6 @@ map.on('measurestart', function(evt) {
 });
 
 const measureControl = new L.Control.Measure({
-    localization: 'cn',
     position: 'topright',
     primaryLengthUnit: 'meters',
     secondaryLengthUnit: 'kilometers',
@@ -30,7 +29,8 @@ const measureControl = new L.Control.Measure({
     completedColor: '#C8F2BE',
     className: 'leaflet-measure-resultpopup',
     autoPanPadding: [10, 10],
-    captureZIndex: 10000
+    captureZIndex: 10000,
+    localization: 'cn'
 });
 measureControl.addTo(map);
 
